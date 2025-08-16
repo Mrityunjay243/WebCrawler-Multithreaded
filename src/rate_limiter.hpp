@@ -19,7 +19,7 @@ class DomainRateLimiter{
             std::unique_lock<std::mutex> lock(m); 
             auto& next = nextOk[p->host]; 
             auto now = std::chrono::steady_clock::now(); 
-            if (next<next){
+            if (now<next){
                 auto waitDur = next - now; 
                 lock.unlock(); 
                 std::this_thread::sleep_for(waitDur); 
